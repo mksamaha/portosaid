@@ -52,7 +52,6 @@
         .brand-section { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
         .brand-name { color: var(--airbnb-pink); font-size: 1.5rem; font-weight: 700; line-height: 1; }
         
-        /* شريط التواصل العلوي */
         .top-contact-bar { display: flex; gap: 8px; margin-top: 5px; }
         .top-contact-bar .contact-link { font-size: 0.65rem; padding: 4px 10px; border-radius: 15px; text-decoration: none; display: flex; align-items: center; gap: 4px; border: 1px solid #eee; transition: 0.3s; color: #555; }
         .top-contact-bar .contact-link i { font-size: 0.7rem; }
@@ -85,9 +84,13 @@
         .hero-text h1 { font-size: 5rem; margin: 0; font-weight: 700; text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7), 0px 0px 30px rgba(0, 0, 0, 0.5); }
         .hero-subtitle { font-size: 3.0rem; margin-top: 10px; display: block; font-weight: 300; text-shadow: 1px 1px 10px rgba(0, 0, 0, 1.4); }
 
-        .rentals { padding: 20px 8% 40px; background-color: #f8fbff; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+        .rentals { padding: 20px 5% 40px; background-color: #f8fbff; position: relative; }
+        .rentals-viewport { overflow-x: auto; white-space: nowrap; scroll-behavior: smooth; padding: 20px 0; -webkit-overflow-scrolling: touch; }
+        .rentals-viewport::-webkit-scrollbar { height: 10px; }
+        .rentals-viewport::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .rentals-viewport::-webkit-scrollbar-thumb { background: var(--airbnb-pink); border-radius: 10px; }
+        
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; width: 320px; display: inline-block; vertical-align: top; margin: 0 15px; white-space: normal; }
         .card img.main-img { width: 100%; height: 220px; object-fit: cover; }
         .card-info { padding: 15px; text-align: center; }
         .unit-number { background: var(--coastal-blue); color: white; padding: 2px 10px; border-radius: 5px; font-size: 0.9rem; }
@@ -95,6 +98,10 @@
         .unit-features-grid { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; justify-content: center; background: #fafafa; border-top: 1px solid #eee; }
         .feature-tag { display: flex; align-items: center; gap: 5px; background: white; border: 1px solid #ddd; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; color: #555; }
         .feature-tag i { color: var(--airbnb-pink); font-size: 0.8rem; }
+
+        .rentals .nav-btn { z-index: 50; }
+        .rentals .nav-btn.prev { right: 10px; }
+        .rentals .nav-btn.next { left: 10px; }
 
         .resort-amenities-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0; }
         .resort-item { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #eee; padding: 10px 15px; border-radius: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); font-size: 0.9rem; }
@@ -121,7 +128,6 @@
         .inner-scroll::-webkit-scrollbar-track { background: #f0f0f0; }
         .inner-scroll::-webkit-scrollbar-thumb { background-color: #ff385c; border-radius: 10px; }
 
-        /* تعديلات شاشات الموبايل */
         @media (max-width: 768px) {
             .hero-text h1 { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1.4rem; }
@@ -131,17 +137,11 @@
             .btn-submit { width: 95%; margin: 10px auto; padding: 12px; }
             .dropdown-panel { position: static; width: 100%; box-shadow: none; border: 1px solid #eee; }
             .logo-left img { height: 70px; transform: translateY(-35%); }
-            .grid { grid-template-columns: 1fr; gap: 20px; }
-            .rentals { padding: 15px 5%; }
+            .card { width: 280px; margin: 0 10px; }
             .amenity-card { width: 220px; height: 180px; }
             .floating-btn { bottom: 20px; right: 20px; padding: 10px 20px; font-size: 0.9rem; }
-            
-            /* تعديلات قسم بورتو سعيد للموبايل */
             .scroll-content-box { padding: 15px; margin: 10px; }
             .inner-scroll { font-size: 0.95rem !important; text-align: right; }
-            .inner-scroll h3 { font-size: 1.3rem !important; }
-            .inner-scroll h4 { font-size: 1.1rem !important; }
-            .inner-scroll p, .inner-scroll li { font-size: 0.95rem !important; }
         }
 
         #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 6000; display: none; justify-content: center; align-items: center; }
@@ -182,8 +182,8 @@
             <div class="brand-section">
                 <div class="brand-name">Porto Vacation</div>
                 <div class="top-contact-bar">
-                    <a href="tel:+201007004090" class="contact-link phone"><i class="fas fa-phone-alt"></i> اتصل بنا</a>
-                    <a href="https://wa.me/201007004090" class="contact-link whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                    <a href="tel:+201551111678" class="contact-link phone"><i class="fas fa-phone-alt"></i> اتصل بنا</a>
+                    <a href="https://wa.me/201551111678" class="contact-link whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
                     <a href="https://www.google.com/maps?q=31.353980,32.077861" target="_blank" class="contact-link map-btn"><i class="fas fa-map-marker-alt"></i> الموقع</a>
                 </div>
             </div>
@@ -222,10 +222,12 @@
         </form>
     </div>
 
-    <h2 class="section-title">الوحدات المتاحة حاليا </h2>
+    <h2 class="section-title">الوحدات المتاحة حاليا</h2>
     <p style="text-align: center; color: #717171; margin-top: -10px; font-size: 0.9rem;">(اضغط على صورة الوحدة لمشاهدة جميع صورها من الداخل)</p>
+    
     <section class="rentals">
-        <div class="grid">
+        <button class="nav-btn prev" onclick="scrollUnits('prev')"><i class="fas fa-chevron-right"></i></button>
+        <div class="rentals-viewport" id="rentalsViewport">
             <div class="card" onclick="selectAndOpen('10428')">
                 <img src="img/10428/1.jpg" class="main-img" alt="شقة فندقية رويال بورتو سعيد 10428 بورتوسعيد">
                 <div class="card-info">
@@ -265,6 +267,7 @@
                 </div>
             </div>
         </div>
+        <button class="nav-btn next" onclick="scrollUnits('next')"><i class="fas fa-chevron-left"></i></button>
     </section>
 
     <h2 class="section-title">الخدمات في بورتوسعيد </h2>
@@ -295,7 +298,7 @@
     </section>
 
     <h2 class="section-title">المناطق السياحية في بورسعيد</h2>
-<p style="text-align: center; color: #717171; margin-top: -10px; font-size: 0.9rem;">(يمكنك الضغط على الصور بالأسفل للتنقل بين الألبومات )</p>
+    <p style="text-align: center; color: #717171; margin-top: -10px; font-size: 0.9rem;">(يمكنك الضغط على الصور بالأسفل للتنقل بين الألبومات )</p>
     <section class="amenities">
         <button class="nav-btn prev" onclick="manualMove('tourismTrack', -320)"><i class="fas fa-chevron-right"></i></button>
         <div class="slider-viewport" id="tourismViewport"><div class="slider-track" id="tourismTrack">
@@ -313,27 +316,17 @@
         <div class="scroll-content-box">
             <div class="inner-scroll">
                 <h3 style="color: #ff385c; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-top: 0;">بورتو سعيد: حيث تلتقي الفخامة و الرفاهية و الاستجمام</h3>
-                <p>استمتع بإجازة استثنائية في <strong>بورتوسعيد</strong>، الوجهة الأكثر تميزاً في غرب بورسعيد، حيث تجمع بين الفخامة والخصوصية. مع <strong>Porto Vacation</strong>، نضع بين يديك تجربة إقامة فندقية تضاهي المنتجعات العالمية بإطلالات بانورامية ساحرة تعانق مياه البحر.</p>
+                <p>استمتع بإجازة استثنائية في <strong>بورتوسعيد</strong>.</p>
 
                 <h4 style="color: #222;">لماذا بورتوسعيد هي اختيارك الأول؟</h4>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>إقامة ملكية:</strong> استرخِ في شقق فندقية مجهزة بالكامل (ميكروويف، فرن كهربائي، بوتجاز، ثلاجة، غسالة، مطبخ كامل) لتلبي كافة تطلعاتك.</li>
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>عالم من الترفيه:</strong> استمتع بـ <strong>أكوا بارك</strong> متكاملة برسوم رمزية، وأكثر من <strong>20 حمام سباحة مجاني</strong>.</li>
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>شاطئ خاص ممتد:</strong> دخول الشاطئ مجاناً مع تواجد فرق المنقذين وكافة الخدمات المساعدة.</li>
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>رفاهية التسوق والتذوق:</strong> ممشى سياحي يضم مطاعم فخمة ومأكولات شعبية، وكافتريات، وسوبر ماركت بنفس أسعار المدينة.</li>
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>مملكة الأطفال:</strong> مناطق "كيدز آريا" مجانية تماماً ومجهزة بأمان تام.</li>
-                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>راحة وشمولية:</strong> مواقف سيارات مجانية قريبة، ومداخل مجهزة لذوي الاحتياجات الخاصة.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>إقامة ملكية:</strong> استرخِ في شقق فندقية مجهزة بالكامل.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>عالم من الترفيه:</strong> استمتع بـ <strong>أكوا بارك</strong> متكاملة برسوم رمزية.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>شاطئ خاص ممتد:</strong> دخول الشاطئ مجاناً.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>رفاهية التسوق والتذوق:</strong> ممشى سياحي يضم مطاعم فخمة.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>مملكة الأطفال:</strong> مناطق "كيدز آريا" مجانية.</li>
+                    <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #25d366; margin-left: 8px;"></i> <strong>راحة وشمولية:</strong> مواقف سيارات مجانية.</li>
                 </ul>
-
-                <h4 style="color: #222;">موقع استراتيجي يربطك بأجمل المدن:</h4>
-                <ul>
-                    <li><strong>قلب بورسعيد:</strong> (20 كم) حديقة فريال، المعدية، سوق السمك، وجبل الملح.</li>
-                    <li><strong>رأس البر:</strong> (40 كم) لتجربة سياحية إضافية.</li>
-                </ul>
-                
-                <p style="background: #fff8f9; padding: 15px; border-radius: 10px; border-right: 4px solid #ff385c;">
-                    نحن في <strong>Porto Vacation</strong> نضمن لك سهولة الحجز وتوافر أفضل إيجارات بورتو سعيد بأفضل الأسعار لعام 2026.
-                </p>
             </div>
         </div>
     </section>
@@ -371,6 +364,13 @@
             document.getElementById('guestInput').value = total;
         }
 
+        function scrollUnits(dir) {
+            const viewport = document.getElementById('rentalsViewport');
+            const scrollAmount = 350; 
+            if (dir === 'prev') viewport.scrollLeft -= scrollAmount;
+            else viewport.scrollLeft += scrollAmount;
+        }
+
         function selectAndOpen(num) { 
             document.getElementById('unitInput').value = num; 
             document.getElementById('booking-section').scrollIntoView({behavior: "smooth"});
@@ -397,7 +397,6 @@
             function animate() {
                 sliderOffsets[trackId] += speed;
                 if (sliderOffsets[trackId] >= totalOriginalWidth) sliderOffsets[trackId] = 0;
-                if (sliderOffsets[trackId] < 0) sliderOffsets[trackId] = totalOriginalWidth;
                 track.style.transform = `translateX(${sliderOffsets[trackId]}px)`;
                 requestAnimationFrame(animate);
             }
@@ -408,6 +407,7 @@
             sliderOffsets[trackId] += distance;
             const track = document.getElementById(trackId);
             track.style.transition = "transform 0.4s ease-out";
+            track.style.transform = `translateX(${sliderOffsets[trackId]}px)`;
             setTimeout(() => { track.style.transition = "none"; }, 400);
         }
 
@@ -430,6 +430,7 @@
         }
 
         function createGalleryElements(src, track, grid) {
+            if (currentPhotos.includes(src)) return;
             currentPhotos.push(src);
             const imgS = document.createElement('img');
             imgS.src = src; imgS.style.width='800px'; imgS.style.height='500px'; imgS.style.objectFit='cover'; 
@@ -442,16 +443,33 @@
             grid.appendChild(imgG);
         }
 
+        /* --- استراتيجية شاملة للوحدات فقط --- */
+        function smartLoadImages(unitNumber, track, grid) {
+            const baseNames = [];
+            for(let i=1; i<=100; i++) baseNames.push(i.toString());
+            const prefixes = ['', '1 ', '2 ', '5 ', '6 '];
+            const suffixes = ['', '_1', ' (1)', ' (2)', ' (3)', ' (4)', ' (5)', ' (6)', ' (7)', ' (8)', ' (9)', ' (10)', ' (11)', ' (12)', ' (13)', ' (14)', ' (15)', ' (16)', ' (17)', ' (18)', ' (19)', ' (20)'];
+            
+            baseNames.forEach(base => {
+                prefixes.forEach(pre => {
+                    suffixes.forEach(suf => {
+                        const fileName = `${pre}${base}${suf}.jpg`;
+                        const src = `img/${unitNumber}/${fileName}`;
+                        const img = new Image();
+                        img.onload = () => createGalleryElements(src, track, grid);
+                        img.src = src;
+                    });
+                });
+            });
+        }
+
+        /* --- استعادة منطق المجموعات للخدمات والمناطق السياحية --- */
         function openGallery(unitNumber) {
             const modal = document.getElementById('galleryModal');
             const track = document.getElementById('modalTrack');
             const grid = document.getElementById('allPhotosGrid');
             track.innerHTML = ''; grid.innerHTML = ''; currentPhotos = [];
-            for (let i = 1; i <= 50; i++) {
-                const src = `img/${unitNumber}/${i}.jpg`;
-                const img = new Image(); img.src = src;
-                img.onload = () => createGalleryElements(src, track, grid);
-            }
+            smartLoadImages(unitNumber, track, grid);
             modal.style.display = 'flex';
             setTimeout(() => initDragSlider(document.getElementById('modalViewport'), track, 2.5), 500);
         }
