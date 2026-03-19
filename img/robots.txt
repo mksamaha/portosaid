@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap for Porto Said Project
-Sitemap: https://www.portosaid.com/sitemap.xml
